@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>Product CRUD</title>
   <link rel="stylesheet" type="text/css" href="style.css">
 </head>
+
 <body>
   <h1>Product CRUD</h1>
 
@@ -13,14 +15,55 @@
     <input type="text" id="name" name="name" required>
     <label for="price">Price:</label>
     <input type="number" id="price" name="price" required step="0.01">
+    <label for="description">Description:</label>
+    <input type="text" id="description" name="description" required>
     <button type="submit">Add</button>
   </form>
 
-  <ul id="products"></ul>
+  <div class="container_products">
+    <ul id="products"></ul>
+  </div>
+
+  <!-- Modal de Atualização -->
+  <div id="update-modal" class="modal" style="display: none;">
+    <div class="modal-content">
+      <form id="update-product-form">
+        <h2>Update Product</h2>
+        
+        <!-- Campo de ID, escondido -->
+        <input type="hidden" id="update-id" name="id">
+        
+        <label for="update-name">Name:</label>
+        <input type="text" id="update-name" name="name" required>
+        
+        <label for="update-price">Price:</label>
+        <input type="number" id="update-price" name="price" required step="0.01">
+        
+        <label for="update-description">Description:</label>
+        <input type="text" id="update-description" name="description" required>
+  
+        <button type="submit">Update</button>
+        <button type="button" id="close-modal">Close</button>
+      </form>
+    </div>
+  </div>
+
+
+
+  <form id="get-product-form">
+    <h2>Get Product By Id</h2>
+    <label for="product_id">Id:</label>
+    <input type="number" id="product_id" name="product_id" required>
+    <button type="submit">Find</button>
+  </form>
+  
+  <div id="product-details">
+  </div>
+
 
   <script src="app.js"></script>
+
   <script>
-    // Call fetchProducts() when the page loads
     window.addEventListener('load', fetchProducts);
   </script>
 </body>
