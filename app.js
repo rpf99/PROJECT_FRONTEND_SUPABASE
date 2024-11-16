@@ -9,7 +9,6 @@ const updateModal = document.querySelector("#update-modal");
 const closeModalButton = document.querySelector('#close-modal');
 const updateProductForm = document.querySelector('#update-product-form');
 
-
 const getProductForm = document.querySelector("#get-product-form")
 const getProductId = document.querySelector("#product_id")
 const getProductDetails = document.querySelector("#product-details")
@@ -81,12 +80,12 @@ async function getProductById(product_id) {
     }
 
     const product = await response.json()
-
+    console.log(product[0].name)
     getProductDetails.innerHTML = `
-        <h3> Detalhes </h3>
-        <p><strong>Nome:</strong> ${product.name} </p>
-        <p><strong>Preço:</strong> ${product.price} </p>
-        <p><strong>Descrição:</strong> ${product.description} </p>
+        <h3> Detalhes do Produto </h3>
+        <p><strong>Nome:</strong> ${product[0].name} </p>
+        <p><strong>Preco:</strong> ${product[0].price} </p>
+        <p><strong>Descricao:</strong> ${product[0].description} </p>
     `
   } catch (error) {
       getProductDetails.innerHTML = `<p>${error.message} </p>`
@@ -106,17 +105,13 @@ addProductForm.addEventListener('submit', async event => {
   await fetchProducts();
 });
 
-
-
 getProductForm.addEventListener('submit', async event => {
   event.preventDefault();
-  const productId = productIdInput.value;
+  const productId = getProductId.value;
   if (productId) {
     getProductById(productId);
   }  
 })
-
-
 
 //Event Listener to Update the Product
 updateProductForm.addEventListener('submit', async event => {
